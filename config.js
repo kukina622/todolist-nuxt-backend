@@ -1,13 +1,13 @@
 const config = {
   database: {
-    username: "",
-    password: "",
-    host: "",
-    port: "",
-    name: "",
+    username: "todolist",
+    password: "123456",
+    host: "127.0.0.1",
+    port: 3306,
+    name: "todolist"
   },
   port: 3000,
-  secretKey: "",
+  secretKey: ""
 };
 
 module.exports = config;
