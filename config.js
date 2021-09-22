@@ -7,7 +7,7 @@ const config = {
     name: "todolist"
   },
   port: 3000,
-  secretKey: ""
+  secretKey: "superSecretKey"
 };
 
 module.exports = config;

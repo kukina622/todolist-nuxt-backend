@@ -1,8 +1,10 @@
 const express = require("express");
+const session = require("express-session");
 const { secretKey } = require("./config");
 let sequelize = require("./models");
 
 let registerController = require("./controllers/registerController");
+let loginController = require("./controllers/loginController");
 
 module.exports = function appInit() {
   let app = new express();
@@ -11,11 +13,21 @@ module.exports = function appInit() {
     // connect database
     await sequelize.authenticate();
     console.log("Connection has been established successfully.");
-    await sequelize.sync()
+    await sequelize.sync();
     console.log("Database has been synced.");
+
+    app.use(
+      session({
+        secret: secretKey,
+        name: 'user',
+        saveUninitialized: false,
+        resave: true
+      })
+    );
 
     // controllers
     app.use("/api", registerController);
+    app.use("/api", loginController);
 
     resolve(app);
   });
