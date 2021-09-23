@@ -1,7 +1,11 @@
 const express = require("express");
 const session = require("express-session");
+const cors = require("cors");
 const { secretKey } = require("./config");
 let sequelize = require("./models");
+
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./swagger");
 
 let registerController = require("./controllers/registerController");
 let loginController = require("./controllers/loginController");
@@ -10,7 +14,9 @@ let taskController = require("./controllers/taskController");
 module.exports = function appInit() {
   let app = new express();
   return new Promise(async (resolve) => {
+    app.use(cors());
     app.use(express.json());
+    app.use(express.urlencoded({ extended: true }));
     // connect database
     await sequelize.authenticate();
     console.log("Connection has been established successfully.");
@@ -29,9 +35,11 @@ module.exports = function appInit() {
     // controllers
     app.use("/api", registerController);
     app.use("/api", loginController);
-
     app.use("/api", taskController);
-    
+
+    //swagger API
+    app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
     resolve(app);
   });
 };

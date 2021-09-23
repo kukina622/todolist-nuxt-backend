@@ -19,14 +19,27 @@ router.post("/login", async (req, res) => {
 
     if (result) {
       req.session.user = username;
-      return res.status(200).json({
-        username: username
-      });
+      return res.status(200).end();
     }
   }
 
   return res.status(401).json({
     message: "LOGIN_FAILED"
+  });
+});
+
+router.get("/logout", (req, res) => {
+  req.session.destroy();
+  res.status(200).end();
+});
+
+router.get("/isLogin", (req, res) => {
+  let isLogin = false;
+  if (req.session.user) {
+    isLogin = true;
+  }
+  res.status(200).json({
+    isLogin: isLogin
   });
 });
 
