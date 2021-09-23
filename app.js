@@ -5,6 +5,7 @@ let sequelize = require("./models");
 
 let registerController = require("./controllers/registerController");
 let loginController = require("./controllers/loginController");
+let taskController = require("./controllers/taskController");
 
 module.exports = function appInit() {
   let app = new express();
@@ -19,7 +20,7 @@ module.exports = function appInit() {
     app.use(
       session({
         secret: secretKey,
-        name: 'user',
+        name: "user",
         saveUninitialized: false,
         resave: true
       })
@@ -29,6 +30,8 @@ module.exports = function appInit() {
     app.use("/api", registerController);
     app.use("/api", loginController);
 
+    app.use("/api", taskController);
+    
     resolve(app);
   });
 };

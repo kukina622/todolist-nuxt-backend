@@ -19,7 +19,9 @@ router.post("/login", async (req, res) => {
 
     if (result) {
       req.session.user = username;
-      return res.status(200).end();
+      return res.status(200).json({
+        username: username
+      });
     }
   }
 

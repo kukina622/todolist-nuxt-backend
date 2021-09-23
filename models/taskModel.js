@@ -16,18 +16,16 @@ const Tasks = sequelize.define(
     end_date: {
       type: DataTypes.DATEONLY
     },
-    uid: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: userModel,
-        key: "uid"
-      }
+    is_finish: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     }
   },
   {
     timestamps: false
   }
 );
+
+Tasks.belongsTo(userModel, { foreignKey: "uid" });
 
 module.exports = Tasks;
