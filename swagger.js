@@ -1,4 +1,5 @@
 const swaggerJsdoc = require("swagger-jsdoc");
+const { port } = require("./config");
 
 const options = {
   swaggerDefinition: {
@@ -8,7 +9,7 @@ const options = {
       title: "todoList API",
       version: "1.0.0"
     },
-    host: "127.0.0.1:3000",
+    host: `127.0.0.1:${port}`,
     basePath: "/api",
     paths: {
       "/register": {
@@ -243,7 +244,7 @@ const options = {
           ],
           responses: {
             200: {
-              description: "Update success",
+              description: "Update success"
             },
             403: {
               description: "No login or No permission",
@@ -257,7 +258,7 @@ const options = {
                 }
               }
             },
-            404:{
+            404: {
               description: "Update fail",
               schema: {
                 type: "object",
@@ -268,7 +269,6 @@ const options = {
                   }
                 }
               }
-
             }
           }
         },
@@ -287,7 +287,7 @@ const options = {
           ],
           responses: {
             200: {
-              description: "Delete success",
+              description: "Delete success"
             },
             403: {
               description: "No login or No permission",
@@ -301,7 +301,7 @@ const options = {
                 }
               }
             },
-            404:{
+            404: {
               description: "Delete fail",
               schema: {
                 type: "object",
@@ -312,10 +312,8 @@ const options = {
                   }
                 }
               }
-
             }
           }
-
         }
       }
     }
