@@ -2,6 +2,7 @@ const express = require("express");
 const session = require("express-session");
 const cors = require("cors");
 const { secretKey } = require("./config");
+let morgan = require("morgan");
 let sequelize = require("./models");
 
 const swaggerUi = require("swagger-ui-express");
@@ -17,11 +18,13 @@ module.exports = function appInit() {
     app.use(cors());
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
+    app.use(morgan("tiny"));
+    
     // connect database
     await sequelize.authenticate();
-    console.log("Connection has been established successfully.");
+    console.log("[Database] Connection has been established successfully.");
     await sequelize.sync();
-    console.log("Database has been synced.");
+    console.log("[Database] Database has been synced.");
 
     app.use(
       session({
