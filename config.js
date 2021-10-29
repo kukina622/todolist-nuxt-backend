@@ -1,8 +1,8 @@
 const config = {
   database: {
     username: "todolist",
-    password: "123456",
-    host: "127.0.0.1",
+    password: "itspasswordfortodolist",
+    host: "mysql",
     port: 3306,
     name: "todolist"
   },

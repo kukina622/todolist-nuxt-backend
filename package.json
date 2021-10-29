@@ -18,6 +18,7 @@
   },
   "scripts": {
     "dev": "nodemon server.js",
-    "build": "docker build -t todolist_nuxt_backend . --no-cache"
+    "build": "docker-compose build --no-cache",
+    "deploy": "docker-compose up -d"
   }
 }

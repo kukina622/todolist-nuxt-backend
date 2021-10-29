@@ -1,0 +1,26 @@
+version: "3.7"
+services:
+  backend:
+    image: todolist_nuxt_backend
+    build: .
+    ports:
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      - "mysql"
+
+  mysql:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "thepasswordyouwanttoaccessthedatabase"
+      MYSQL_DATABASE: "todolist"
+      MYSQL_USER: "todolist"
+      MYSQL_PASSWORD: "itspasswordfortodolist"
+
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - "127.0.0.1:9100:80"
+    environment:
+      - PMA_HOST=mysql
+    depends_on:
+      - "mysql"
